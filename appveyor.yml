@@ -1,0 +1,12 @@
+before_build:
+  - cmd: choco install wget
+  - wget -q https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-dev-win-x64.latest.exe
+  - dotnet-dev-win-x64.latest.exe /install /quiet /log dotnetinstall.log
+  - ps: Push-AppveyorArtifact "dotnetinstall.log"
+  - ps: .\clone-mono.ps1
+
+build_script:
+  - cmd: dotnet restore
+  - cmd: dotnet build
+  - cmd: dotnet pack --version-suffix r%APPVEYOR_BUILD_NUMBER%
+  - ps: Push-AppveyorArtifact "src\CoreCompat.System.Drawing\bin\Debug\CoreCompat.System.Drawing.1.0.0-r$($env:APPVEYOR_BUILD_NUMBER).nupkg"

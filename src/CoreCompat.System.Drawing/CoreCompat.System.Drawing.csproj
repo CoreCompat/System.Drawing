@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <MonoDir>$(ProjectDir)..\..\..\mono\</MonoDir>
+    <MonoDir>$(MSBuildThisFileDirectory)..\..\mono\</MonoDir>
     <SystemDrawingDir>$(MonoDir)mcs\class\System.Drawing\</SystemDrawingDir>
     <SignAssembly>False</SignAssembly>
     <AssemblyOriginatorKeyFile>CoreCompat.System.Drawing.snk</AssemblyOriginatorKeyFile>
@@ -55,4 +55,8 @@
     <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001668-00" />
     <PackageReference Include="System.Security.Permissions" Version="4.4.0-beta-25104-02" />
   </ItemGroup>
+
+  <Target Name="CheckMonoSources" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('$(SystemDrawingDir)')" Text="Could not find Mono's System.Drawing at '$(SystemDrawingDir)'. Did you clone the Mono repository using clone-mono.ps1?" />
+  </Target>
 </Project>
