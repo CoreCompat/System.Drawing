@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -10,7 +10,7 @@
   <PropertyGroup>
     <MonoDir>$(ProjectDir)..\..\..\mono\</MonoDir>
     <SystemDrawingDir>$(MonoDir)mcs\class\System.Drawing\</SystemDrawingDir>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <AssemblyOriginatorKeyFile>CoreCompat.System.Drawing.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
@@ -19,6 +19,7 @@
     <Compile Include="$(MonoDir)mcs\build\common\MonoTODOAttribute.cs" />
     <Compile Include="$(MonoDir)mcs\build\common\SR.cs" />
     <Compile Include="$(SystemDrawingDir)**\*.cs" />
+    <Compile Remove="$(SystemDrawingDir)Assembly\AssemblyInfo.cs" />
     <Compile Remove="$(SystemDrawingDir)Mainsoft.Drawing.Configuration.jvm\**\*.cs" />
     <Compile Remove="$(SystemDrawingDir)Test\**\*.cs" />
     <Compile Remove="$(SystemDrawingDir)Samples\**\*.cs" />
@@ -27,13 +28,19 @@
 
     <Compile Remove="$(SystemDrawingDir)System.Drawing\KnownColor.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Color.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\ColorConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Point.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\PointConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\PointF.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemColors.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Size.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\SizeConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\SizeF.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\SizeFConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Rectangle.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\RectangleConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\RectangleF.cs" />
-    
+
     <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/IToolboxService.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxComponentsCreatingEventArgs.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxComponentsCreatingEventHandler.cs" />
@@ -45,6 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="NETStandard.Library" Version="2.0.0-beta-001651-00" />
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001668-00" />
+    <PackageReference Include="System.Security.Permissions" Version="4.4.0-beta-25104-02" />
   </ItemGroup>
 </Project>
