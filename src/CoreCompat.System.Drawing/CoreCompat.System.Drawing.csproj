@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net462</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
+    <DefineConstants>$(DefineConstants);NETCORE;FEATURE_TYPECONVERTER</DefineConstants>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -15,6 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="$(SystemDrawingDir)Assembly\*.ico">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
     <Compile Include="$(MonoDir)mcs\build\common\Locale.cs" />
     <Compile Include="$(MonoDir)mcs\build\common\MonoTODOAttribute.cs" />
     <Compile Include="$(MonoDir)mcs\build\common\SR.cs" />
@@ -26,6 +30,17 @@
     <Compile Remove="$(SystemDrawingDir)System.Drawing.Printing\PrintingPermission.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing.Printing\PrintingPermissionAttribute.cs" />
 
+    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/IToolboxService.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxComponentsCreatingEventArgs.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxComponentsCreatingEventHandler.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxItem.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxItemCollection.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxItemCreatorCallback.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/IToolboxItemProvider.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/IToolboxUser.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
     <Compile Remove="$(SystemDrawingDir)System.Drawing\KnownColor.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Color.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\ColorConverter.cs" />
@@ -40,20 +55,15 @@
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Rectangle.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\RectangleConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\RectangleF.cs" />
-
-    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/IToolboxService.cs" />
-    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxComponentsCreatingEventArgs.cs" />
-    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxComponentsCreatingEventHandler.cs" />
-    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxItem.cs" />
-    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxItemCollection.cs" />
-    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/ToolboxItemCreatorCallback.cs" />
-    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/IToolboxItemProvider.cs" />
-    <Compile Remove="$(SystemDrawingDir)System.Drawing.Design/IToolboxUser.cs" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
     <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001668-00" />
     <PackageReference Include="System.Security.Permissions" Version="4.4.0-beta-25104-02" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <Reference Include="System" />
   </ItemGroup>
 
   <Target Name="CheckMonoSources" BeforeTargets="BeforeBuild">

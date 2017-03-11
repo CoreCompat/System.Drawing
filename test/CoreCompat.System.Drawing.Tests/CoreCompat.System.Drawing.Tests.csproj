@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net462</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -16,9 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0-preview-20170123-02" />
-    <PackageReference Include="dotnet-test-nunit" Version="3.4.0-beta-3" />
     <PackageReference Include="NUnit" Version="3.6.1" />
+    <PackageReference Include="NUnitLite" Version="3.6.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,11 +29,25 @@
     <Compile Include="$(SystemDrawingDir)/Test/System.Drawing.Drawing2D/*.cs" />
     <Compile Include="$(SystemDrawingDir)/Test/System.Drawing.Text/*.cs" />
     <Compile Remove="$(SystemDrawingDir)/Test/**/*Cas.cs" />
+
+    <None Include="$(SystemDrawingDir)/Test/System.Drawing/bitmaps/*.*">
+      <Link>Test/System.Drawing/bitmaps/%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\CoreCompat.System.Drawing\CoreCompat.System.Drawing.csproj" />
-    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001668-00" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001509-00" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
   </ItemGroup>
 
   <Target Name="CheckMonoSources" BeforeTargets="BeforeBuild">
