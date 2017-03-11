@@ -2,8 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFrameworks>net462;netcoreapp2.0</TargetFrameworks>
+    <NetStandardImplicitPackageVersion>2.0.0-beta-25006-01</NetStandardImplicitPackageVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
   </PropertyGroup>
 
@@ -40,14 +45,15 @@
     <ProjectReference Include="..\..\src\CoreCompat.System.Drawing\CoreCompat.System.Drawing.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
-    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001509-00" />
-  </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
+    <PackageReference Update="NETStandard.Library" Version="2.0.0-beta-25110-01" />
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001509-00" />
   </ItemGroup>
 
   <Target Name="CheckMonoSources" BeforeTargets="BeforeBuild">

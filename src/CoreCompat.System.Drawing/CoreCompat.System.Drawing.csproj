@@ -1,13 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);NETCORE;FEATURE_TYPECONVERTER</DefineConstants>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <TargetFrameworks>net462;netstandard2.0;netcoreapp2.0</TargetFrameworks>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+  </PropertyGroup>
+  
   <PropertyGroup>
     <MonoDir>$(MSBuildThisFileDirectory)..\..\mono\</MonoDir>
     <SystemDrawingDir>$(MonoDir)mcs\class\System.Drawing\</SystemDrawingDir>
@@ -41,13 +45,14 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
+    <!-- Curiously, SystemColors is part of netcoreapp but not of netstandard -->
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemColors.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\KnownColor.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Color.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\ColorConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Point.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\PointConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\PointF.cs" />
-    <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemColors.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Size.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\SizeConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\SizeF.cs" />
@@ -57,9 +62,17 @@
     <Compile Remove="$(SystemDrawingDir)System.Drawing\RectangleF.cs" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <Compile Include="$(SystemDrawingDir)System.Drawing\SystemColors.cs" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
-    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001668-00" />
-    <PackageReference Include="System.Security.Permissions" Version="4.4.0-beta-25104-02" />
+    <PackageReference Update="NETStandard.Library" Version="2.0.0-beta-25110-01" />
+    <PackageReference Include="System.Security.Permissions" Version="4.4.0-beta-25110-02" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001509-00" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
