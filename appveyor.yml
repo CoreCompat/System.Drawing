@@ -11,4 +11,6 @@ build_script:
   - cmd: dotnet pack --version-suffix r%APPVEYOR_BUILD_NUMBER%
   - ps: Push-AppveyorArtifact "src\CoreCompat.System.Drawing\bin\Debug\CoreCompat.System.Drawing.1.0.0-r$($env:APPVEYOR_BUILD_NUMBER).nupkg"
 
-test: off
+test_script:
+  - cmd: cd test\CoreCompat.System.Drawing.Tests
+  - cmd: dotnet run
