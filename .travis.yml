@@ -1,0 +1,21 @@
+dist: trusty
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y pkg-config libglib2.0-dev libcairo2-dev libtiff4-dev libexif-dev libgif-dev libjpeg-dev libunwind8
+  - wget -nv -nc https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-dev-ubuntu-x64.latest.tar.gz -O dotnet-dev-ubuntu-x64.latest.tar.gz
+  - mkdir dotnet
+  - tar -C dotnet -k -xvzf dotnet-dev-ubuntu-x64.latest.tar.gz
+
+install:
+  - ./clone-mono.sh
+  - ./clone-gdiplus.sh
+
+script:
+  - cd libgdiplus
+  - ./autogen.sh
+  - make
+  - cd ..
+  - dotnet/dotnet restore System.Drawing.sln
+  - dotnet/dotnet build System.Drawing.sln
+  - MALLOC_CHECK_=1 LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/libgdiplus/src/.libs/ dotnet/dotnet run -p test/CoreCompat.System.Drawing.Tests/CoreCompat.System.Drawing.Tests.csproj --where "cat != NotWorking"
