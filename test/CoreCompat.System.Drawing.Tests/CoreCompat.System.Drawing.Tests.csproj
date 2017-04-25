@@ -52,9 +52,18 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
+    <!-- These classes are not supported on netstandard -->
     <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestSystemBrushes.cs" />
     <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestSystemPens.cs" />
+
+    <!-- These classes ship with NETStandard.Library -->
     <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/ColorTranslator.cs" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestSizeFConverter.cs" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestSizeConverter.cs" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestRectangleFConverter.cs" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestRectangleConverter.cs" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestPointConverter.cs" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/ColorConverter.cs" />
   </ItemGroup>
 
   <Target Name="CheckMonoSources" BeforeTargets="BeforeBuild">

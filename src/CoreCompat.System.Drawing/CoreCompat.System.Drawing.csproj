@@ -45,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
+    <!-- These classes ship with NETStandard.Library -->
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Color.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\ColorConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Point.cs" />
@@ -57,6 +58,8 @@
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Rectangle.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\RectangleConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\RectangleF.cs" />
+
+    <!-- These classes are not supported on netstandard -->
     <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemColors.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemPens.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemBrushes.cs" />
