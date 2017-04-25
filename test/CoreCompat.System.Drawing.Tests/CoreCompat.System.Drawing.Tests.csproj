@@ -27,12 +27,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="$(SystemDrawingDir)/Test/System.Drawing/*.cs" />
+    <Compile Include="$(SystemDrawingDir)/Test/System.Drawing/*.cs">
+      <Link>Test/System.Drawing/%(FileName)%(Extension)</Link>
+    </Compile>
     <Compile Include="$(SystemDrawingDir)/Test/HostIgnoreList.cs" />
     <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestColor.cs" />
-    <Compile Include="$(SystemDrawingDir)/Test/System.Drawing.Imaging/*.cs" />
-    <Compile Include="$(SystemDrawingDir)/Test/System.Drawing.Drawing2D/*.cs" />
-    <Compile Include="$(SystemDrawingDir)/Test/System.Drawing.Text/*.cs" />
+    <Compile Include="$(SystemDrawingDir)/Test/System.Drawing.Imaging/*.cs">
+      <Link>Test/System.Drawing.Imaging/%(FileName)%(Extension)</Link>
+    </Compile>
+    <Compile Include="$(SystemDrawingDir)/Test/System.Drawing.Drawing2D/*.cs">
+      <Link>Test/System.Drawing.Drawing2D/%(FileName)%(Extension)</Link>
+    </Compile>
+    <Compile Include="$(SystemDrawingDir)/Test/System.Drawing.Text/*.cs">
+      <Link>Test/System.Drawing.Text/%(FileName)%(Extension)</Link>
+    </Compile>
     <Compile Remove="$(SystemDrawingDir)/Test/**/*Cas.cs" />
 
     <None Include="$(SystemDrawingDir)/Test/System.Drawing/bitmaps/*.*">

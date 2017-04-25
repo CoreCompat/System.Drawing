@@ -26,7 +26,9 @@
     <Compile Include="$(MonoDir)mcs\build\common\Locale.cs" />
     <Compile Include="$(MonoDir)mcs\build\common\MonoTODOAttribute.cs" />
     <Compile Include="$(MonoDir)mcs\build\common\SR.cs" />
-    <Compile Include="$(SystemDrawingDir)**\*.cs" />
+    <Compile Include="$(SystemDrawingDir)**\*.cs">
+      <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </Compile>
     <Compile Remove="$(SystemDrawingDir)Assembly\AssemblyInfo.cs" />
     <Compile Remove="$(SystemDrawingDir)Mainsoft.Drawing.Configuration.jvm\**\*.cs" />
     <Compile Remove="$(SystemDrawingDir)Test\**\*.cs" />
@@ -74,6 +76,12 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="C:\Users\frede\Source\Repos\System.Drawing\src\CoreCompat.System.Drawing\..\..\mono\mcs\class\System.Drawing\System.Drawing.Printing\PrintDocument.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
 
   <Target Name="CheckMonoSources" BeforeTargets="BeforeBuild">
