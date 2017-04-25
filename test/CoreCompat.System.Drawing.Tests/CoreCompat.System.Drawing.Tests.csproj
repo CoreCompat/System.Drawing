@@ -63,6 +63,7 @@
     <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestRectangleFConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestRectangleConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestPointConverter.cs" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestPoint.cs" />
     <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/ColorConverter.cs" />
   </ItemGroup>
 
