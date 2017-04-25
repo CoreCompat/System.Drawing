@@ -1,3 +1,3 @@
 #!/bin/sh
 git clone https://github.com/corecompat/libgdiplus/
-git -C libgdiplus checkout optional-x11
+git -C libgdiplus checkout master
