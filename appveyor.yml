@@ -1,6 +1,6 @@
 before_build:
   - cmd: choco install wget
-  - wget -q https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-dev-win-x64.latest.exe
+  - wget -nv -nc https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-dev-win-x64.latest.exe
   - dotnet-dev-win-x64.latest.exe /install /quiet /log dotnetinstall.log
   - ps: Push-AppveyorArtifact "dotnetinstall.log"
   - ps: .\clone-mono.ps1
