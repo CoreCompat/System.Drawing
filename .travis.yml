@@ -1,8 +1,19 @@
 dist: trusty
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - pkg-config
+      - libglib2.0-dev
+      - libcairo2-dev
+      - libtiff4-dev
+      - libexif-dev
+      - libgif-dev
+      - libjpeg-dev
+      - libunwind8
 
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y pkg-config libglib2.0-dev libcairo2-dev libtiff4-dev libexif-dev libgif-dev libjpeg-dev libunwind8
   - wget -nv -nc https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-dev-ubuntu-x64.latest.tar.gz -O dotnet-dev-ubuntu-x64.latest.tar.gz
   - mkdir dotnet
   - tar -C dotnet -k -xvzf dotnet-dev-ubuntu-x64.latest.tar.gz
