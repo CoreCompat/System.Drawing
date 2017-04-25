@@ -52,8 +52,11 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
-    <PackageReference Update="NETStandard.Library" Version="2.0.0-beta-25110-01" />
-    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001509-00" />
+    <PackageReference Update="NETStandard.Library" Version="2.0.0-preview1-25225-02" />
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-preview1-25225-02" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestSystemBrushes.cs" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/TestSystemPens.cs" />
+    <Compile Remove="$(SystemDrawingDir)/Test/System.Drawing/ColorTranslator.cs" />
   </ItemGroup>
 
   <Target Name="CheckMonoSources" BeforeTargets="BeforeBuild">

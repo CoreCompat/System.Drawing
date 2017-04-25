@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);NETCORE;FEATURE_TYPECONVERTER</DefineConstants>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFrameworks>net462;netstandard2.0;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
@@ -45,9 +45,6 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
-    <!-- Curiously, SystemColors is part of netcoreapp but not of netstandard -->
-    <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemColors.cs" />
-    <Compile Remove="$(SystemDrawingDir)System.Drawing\KnownColor.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Color.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\ColorConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Point.cs" />
@@ -60,19 +57,16 @@
     <Compile Remove="$(SystemDrawingDir)System.Drawing\Rectangle.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\RectangleConverter.cs" />
     <Compile Remove="$(SystemDrawingDir)System.Drawing\RectangleF.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <Compile Include="$(SystemDrawingDir)System.Drawing\SystemColors.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemColors.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemPens.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\SystemBrushes.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\KnownColors.cs" />
+    <Compile Remove="$(SystemDrawingDir)System.Drawing\ColorTranslator.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
-    <PackageReference Update="NETStandard.Library" Version="2.0.0-beta-25110-01" />
-    <PackageReference Include="System.Security.Permissions" Version="4.4.0-beta-25110-02" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
-    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0-beta-001509-00" />
+    <PackageReference Update="NETStandard.Library" Version="2.0.0-preview1-25225-02" />
+    <PackageReference Include="System.Security.Permissions" Version="4.4.0-preview1-25225-02" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
