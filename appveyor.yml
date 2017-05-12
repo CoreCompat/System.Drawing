@@ -1,7 +1,7 @@
 before_build:
   - cmd: choco install wget
-  - wget -nv -nc https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-dev-win-x64.latest.exe
-  - dotnet-dev-win-x64.latest.exe /install /quiet /log dotnetinstall.log
+  - wget -nv -nc https://download.microsoft.com/download/3/7/F/37F1CA21-E5EE-4309-9714-E914703ED05A/dotnet-dev-win-x64.2.0.0-preview1-005977.exe
+  - dotnet-dev-win-x64.2.0.0-preview1-005977.exe /install /quiet /log dotnetinstall.log
   - ps: Push-AppveyorArtifact "dotnetinstall.log"
   - ps: .\clone-mono.ps1
 
@@ -12,4 +12,4 @@ build_script:
   - ps: Push-AppveyorArtifact "src\CoreCompat.System.Drawing\bin\Debug\CoreCompat.System.Drawing.1.0.0-r$($env:APPVEYOR_BUILD_NUMBER).nupkg"
 
 test_script:
-  - cmd: dotnet run -p test/CoreCompat.System.Drawing.Tests/CoreCompat.System.Drawing.Tests.csproj --where "cat != NotWorking"
+  - cmd: dotnet test -p test/CoreCompat.System.Drawing.Tests/CoreCompat.System.Drawing.Tests.csproj --where "cat != NotWorking"
