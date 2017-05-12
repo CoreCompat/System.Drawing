@@ -6,17 +6,27 @@
     <DefineConstants>$(DefineConstants);NETCORE;FEATURE_TYPECONVERTER</DefineConstants>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
+    <PackageId>CoreCompat.System.Drawing.v2</PackageId>
+    <VersionPrefix>5.2.0-preview1</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <MonoDir>$(MSBuildThisFileDirectory)..\..\mono\</MonoDir>
     <SystemDrawingDir>$(MonoDir)mcs\class\System.Drawing\</SystemDrawingDir>
     <SignAssembly>False</SignAssembly>
+    <AssemblyTitle>System.Drawing for .NET Core</AssemblyTitle>
+    <Title>System.Drawing for .NET Core</Title>
+    <Description>A port of Mono's System.Drawing for .NET Core 2.0 and above. Includes types such as System.Drawing.Bitmap and System.Drawing.Image, allowing you to interact with images from .NET Core.</Description>
     <AssemblyOriginatorKeyFile>CoreCompat.System.Drawing.snk</AssemblyOriginatorKeyFile>
+    <Authors>MonoProject, Quamotion</Authors>
+    <PackageProjectUrl>https://github.com/CoreCompat/System.Drawing</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CoreCompat/System.Drawing</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>System.Drawing;netcore;netstandard</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
