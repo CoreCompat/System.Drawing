@@ -29,4 +29,4 @@ script:
   - cd ..
   - dotnet/dotnet restore System.Drawing.sln
   - dotnet/dotnet build System.Drawing.sln
-  - MALLOC_CHECK_=1 LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/libgdiplus/src/.libs/ dotnet/dotnet test -p test/CoreCompat.System.Drawing.Tests/CoreCompat.System.Drawing.Tests.csproj --where "cat != 'NotWorking' && test != 'MonoTests.System.Drawing.FontTest.Dispose_ToLogFont_LoopCharSet' && test != 'MonoTests.System.Drawing.FontTest.ToLogFont_AssertUnmanagedCode' && test != 'MonoTests.System.Drawing.FontTest.ToLogFont_DenyUnmanagedCode' && test != 'MonoTests.System.Drawing.GraphicsTest.FromHwnd_Zero'"
+  - MALLOC_CHECK_=1 LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/libgdiplus/src/.libs/ dotnet/dotnet test --filter "TestCategory != 'NotWorking' && FullyQualifiedName != 'MonoTests.System.Drawing.FontTest.Dispose_ToLogFont_LoopCharSet' && FullyQualifiedName != 'MonoTests.System.Drawing.FontTest.ToLogFont_AssertUnmanagedCode' && FullyQualifiedName != 'MonoTests.System.Drawing.FontTest.ToLogFont_DenyUnmanagedCode' && FullyQualifiedName!= 'MonoTests.System.Drawing.GraphicsTest.FromHwnd_Zero'" test/CoreCompat.System.Drawing.Tests/CoreCompat.System.Drawing.Tests.csproj 
