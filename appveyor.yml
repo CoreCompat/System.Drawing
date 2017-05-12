@@ -12,4 +12,4 @@ build_script:
   - ps: Push-AppveyorArtifact "src\CoreCompat.System.Drawing\bin\Debug\CoreCompat.System.Drawing.1.0.0-r$($env:APPVEYOR_BUILD_NUMBER).nupkg"
 
 test_script:
-  - cmd: dotnet test -p test/CoreCompat.System.Drawing.Tests/CoreCompat.System.Drawing.Tests.csproj --where "cat != NotWorking"
+  - cmd: dotnet test --filter "TestCategory != NotWorking" test/CoreCompat.System.Drawing.Tests/CoreCompat.System.Drawing.Tests.csproj 
