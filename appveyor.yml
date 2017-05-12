@@ -9,7 +9,7 @@ build_script:
   - cmd: dotnet restore
   - cmd: dotnet build
   - cmd: dotnet pack --version-suffix r%APPVEYOR_BUILD_NUMBER% -c Release
-  - ps: Push-AppveyorArtifact "src\CoreCompat.System.Drawing\bin\Debug\CoreCompat.System.Drawing.v2.5.2.0-r$($env:APPVEYOR_BUILD_NUMBER).nupkg"
+  - ps: Push-AppveyorArtifact "src\CoreCompat.System.Drawing\bin\Debug\CoreCompat.System.Drawing.v2.5.2.0-preview1-r$($env:APPVEYOR_BUILD_NUMBER).nupkg"
 
 test_script:
   - cmd: dotnet test --filter "TestCategory != NotWorking" test/CoreCompat.System.Drawing.Tests/CoreCompat.System.Drawing.Tests.csproj 
